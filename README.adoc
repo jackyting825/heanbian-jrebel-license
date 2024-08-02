@@ -1,5 +1,4 @@
-
-= heanbian-jrebel-license
+= jrebel-license
 
 WARNING: 建议购买正版许可!
 
@@ -11,32 +10,42 @@ JDK 21
 == 编译
 
 ----
+
 mvn clean -e package
-----
-
-== 编译目录结构
-
-----
-/target/lib_jrebel_license
-/target/heanbian-jrebel-license-1.0-SNAPSHOT.jar
 ----
 
 == 运行
 
-默认端口 `7881`
+默认端口 `8080` 可通过`-p`参数指定端口 例如:
 
 ----
-nohup java -jar heanbian-jrebel-license-1.0-SNAPSHOT.jar -p 7881 &
+
+nohup java -jar heanbian-jrebel-license-1.0-SNAPSHOT.jar -p 9090 &
 ----
 
 == 可用服务
 
 JRebel & JetBrains License Server
 
-JetBrains 激活地址是： https://jrebel.heanbian.com[https://jrebel.heanbian.com]
+JetBrains 激活地址是： http://your server ip+8080 or domain
 
-JRebel 激活地址是： `https://jrebel.heanbian.com/2f672307-13e8-415c-b439-49b03ef3f4fb`
+JRebel 激活地址是： `http://your server ip+8080 or domain/2f672307-13e8-415c-b439-49b03ef3f4fb`
 
 == 源自
 
+fork from https://github.com/heanbian/heanbian-jrebel-license
+
 https://github.com/Byron4j/JrebelLicenseServerforJava[https://github.com/Byron4j/JrebelLicenseServerforJava]
+
+
+修改项:
+
+1.默认端口更改为8080
+
+2.服务器地址说明
+
+3.原仓库的代码在我本地打包不成功,未将依赖copy至jar包中,导致启动Not Found Class，所以修改了打包插件,将依赖直接打包进jar中
+
+3.增加构建docker镜像脚本
+
+4.可使用已经打包好的镜像 docker pull jackyting825/jrebel:latest

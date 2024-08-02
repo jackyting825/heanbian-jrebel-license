@@ -1,112 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.heanbian</groupId>
-	<artifactId>heanbian-jrebel-license</artifactId>
-	<version>1.0-SNAPSHOT</version>
+    <groupId>com.heanbian</groupId>
+    <artifactId>heanbian-jrebel-license</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<logback-classic.version>1.5.6</logback-classic.version>
-		<slf4j-api.version>2.0.13</slf4j-api.version>
-		<json.version>20240303</json.version>
-		<commons-lang3.verion>3.14.0</commons-lang3.verion>
-		<bcprov-jdk18on.version>1.78.1</bcprov-jdk18on.version>
-		<jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
-		<jetty-all.version>11.0.0.beta1</jetty-all.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <logback-classic.version>1.5.6</logback-classic.version>
+        <slf4j-api.version>2.0.13</slf4j-api.version>
+        <json.version>20240303</json.version>
+        <commons-lang3.verion>3.14.0</commons-lang3.verion>
+        <bcprov-jdk18on.version>1.78.1</bcprov-jdk18on.version>
+        <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
+        <jetty-all.version>11.0.0.beta1</jetty-all.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-all</artifactId>
-			<version>${jetty-all.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.servlet</groupId>
-			<artifactId>jakarta.servlet-api</artifactId>
-			<version>${jakarta.servlet-api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcprov-jdk18on</artifactId>
-			<version>${bcprov-jdk18on.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3.verion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>${json.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback-classic.version}</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-all</artifactId>
+            <version>${jetty-all.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${jakarta.servlet-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>${bcprov-jdk18on.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.verion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.4.2</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.heanbian.jrebel.MainServer</mainClass>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>../lib_jrebel_license/</classpathPrefix>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<?m2e ignore?>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.7.0</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/lib_jrebel_license</outputDirectory>
-							<excludeGroupIds>com.heanbian</excludeGroupIds>
-						</configuration>
-					</execution>
-					<execution>
-						<id>unpack-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-							<includeGroupIds>com.heanbian</includeGroupIds>
-							<excludes>META-INF/MANIFEST.MF,META-INF/maven/**</excludes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <!--			<plugin>-->
+            <!--				<groupId>org.apache.maven.plugins</groupId>-->
+            <!--				<artifactId>maven-jar-plugin</artifactId>-->
+            <!--				<version>3.4.2</version>-->
+            <!--				<configuration>-->
+            <!--					<archive>-->
+            <!--						<manifest>-->
+            <!--							<mainClass>com.heanbian.jrebel.MainServer</mainClass>-->
+            <!--							<addClasspath>true</addClasspath>-->
+            <!--							<classpathPrefix>../lib_jrebel_license/</classpathPrefix>-->
+            <!--						</manifest>-->
+            <!--					</archive>-->
+            <!--				</configuration>-->
+            <!--			</plugin>-->
+            <!--			<plugin>-->
+            <!--				<?m2e ignore?>-->
+            <!--				<groupId>org.apache.maven.plugins</groupId>-->
+            <!--				<artifactId>maven-dependency-plugin</artifactId>-->
+            <!--				<version>3.7.0</version>-->
+            <!--				<executions>-->
+            <!--					<execution>-->
+            <!--						<id>copy-dependencies</id>-->
+            <!--						<phase>package</phase>-->
+            <!--						<goals>-->
+            <!--							<goal>copy-dependencies</goal>-->
+            <!--						</goals>-->
+            <!--						<configuration>-->
+            <!--							<outputDirectory>${project.build.directory}/lib_jrebel_license</outputDirectory>-->
+            <!--							<excludeGroupIds>com.heanbian</excludeGroupIds>-->
+            <!--						</configuration>-->
+            <!--					</execution>-->
+            <!--					<execution>-->
+            <!--						<id>unpack-dependencies</id>-->
+            <!--						<phase>prepare-package</phase>-->
+            <!--						<goals>-->
+            <!--							<goal>unpack-dependencies</goal>-->
+            <!--						</goals>-->
+            <!--						<configuration>-->
+            <!--							<outputDirectory>${project.build.outputDirectory}</outputDirectory>-->
+            <!--							<overWriteReleases>true</overWriteReleases>-->
+            <!--							<overWriteSnapshots>true</overWriteSnapshots>-->
+            <!--							<includeGroupIds>com.heanbian</includeGroupIds>-->
+            <!--							<excludes>META-INF/MANIFEST.MF,META-INF/maven/**</excludes>-->
+            <!--						</configuration>-->
+            <!--					</execution>-->
+            <!--				</executions>-->
+            <!--			</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <!-- 此处填写打包后jar包后添加的标识 -->
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <!-- 此处填写程序的主入口(main方法) -->
+                            <mainClass>com.heanbian.jrebel.MainServer</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

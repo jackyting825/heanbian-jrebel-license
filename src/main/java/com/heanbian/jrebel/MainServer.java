@@ -45,7 +45,7 @@ public class MainServer extends AbstractHandler {
 		var port = arguments.get("p");
 
 		if (port == null || !port.matches("\\d+")) {
-			port = "7881";
+			port = "8080";
 		}
 
 		var server = new Server(Integer.parseInt(port));
@@ -261,7 +261,7 @@ public class MainServer extends AbstractHandler {
 		response.setStatus(HttpServletResponse.SC_OK);
 		baseRequest.setHandled(true);
 
-		var licenseServer = "https://jrebel.heanbian.com";
+		var licenseServer = "http://your server ip+8080 or domain";
 
 		var guid = UUID.randomUUID().toString();
 		var licenseUrl = licenseServer + "/" + guid;
@@ -272,7 +272,6 @@ public class MainServer extends AbstractHandler {
 				<head>
 				<meta charset="UTF-8">
 				<title>JRebel & JetBrains License Server</title>
-				<link href="https://cdnimg.heanbian.com/favicon.ico" type="image/x-icon" rel="icon">
 				<style>
 				.content {
 					width: 750px;
@@ -313,8 +312,6 @@ public class MainServer extends AbstractHandler {
 
 					<p class="mt20">JetBrains 激活地址是：%s</p>
 					<p class="mt5">JRebel 激活地址是：%s <a href="javascript:copyText();">复制</a> <a href="/">刷新</a></p>
-
-					<p class="mt30">GitHub 地址：<a href="https://github.com/heanbian/heanbian-jrebel-license">https://github.com/heanbian/heanbian-jrebel-license</a></p>
 				</div>
 				<script>
 					var _text = "%s";
