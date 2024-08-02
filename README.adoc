@@ -49,3 +49,7 @@ https://github.com/Byron4j/JrebelLicenseServerforJava[https://github.com/Byron4j
 3.增加构建docker镜像脚本
 
 4.可使用已经打包好的镜像 docker pull jackyting825/jrebel:latest
+
+5.或者使用我已经部署好的服务 https://jackyting825-jrebel.zeabur.app (基于zeabur搭建的免费镜像,可能会随时被停掉,毕竟白嫖的)
+
+        也可使用koyeb平台进行容器部署,一个账号有一个免费服务;
